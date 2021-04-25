@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import UsernameField from "../components/UsernameField";
+import Link from 'next/Link'
 
 const chatRoom2 = () => {
       // save the socket
@@ -25,11 +26,11 @@ const chatRoom2 = () => {
         }
         */
       ]);
-      const room = "room2"
     
+      const room = "room2"
+
       const connectSocket = () => {
-        // prime the server first. yes, this is an extra call and is inefficient.
-        // but we're using NextJS for convenience, so this is a necessary evil.
+        // prime the server first. extra call needed to use Nextjs
         fetch("/api/chatRoom");
         // after making sure that socket server is primed, connect to it.
     
@@ -42,8 +43,10 @@ const chatRoom2 = () => {
             newSocket.emit('room', room)
             console.log("Chat app connected");
           });
-
+    
+          // handles message
           newSocket.on("message", (message) => {
+              console.log("message in handle ", message)
             setHistory((history) => [...history, message]);
           });
     
@@ -75,7 +78,7 @@ const chatRoom2 = () => {
         }
     
         // submit and blank-out the field.
-        socket.emit("message-submitted", { message, username});
+        socket.emit("message-submitted", { message, username, room });
         setMessage("");
       };
     
@@ -86,7 +89,9 @@ const chatRoom2 = () => {
             <title>See who's talking!</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-    
+          <Link href="/">
+          <a >Back home</a>
+          </Link>
           {/* The username area */}
           <UsernameField
             completed={isUsernameConfirmed}
@@ -97,7 +102,7 @@ const chatRoom2 = () => {
           {/* Form submission */}
           <div>
             <form onSubmit={handleSubmit}>
-            
+          
               <label>
                 Type your message:
                 <input

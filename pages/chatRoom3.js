@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import UsernameField from "../components/UsernameField";
 
-const chatRoom1 = () => {
+const chatRoom3 = () => {
       // save the socket
       const [socket, setSocket] = useState(null);
     
@@ -25,9 +25,10 @@ const chatRoom1 = () => {
         }
         */
       ]);
-    
-      const room = "room1"
 
+      const room = "room3"
+    
+    
       const connectSocket = () => {
         // prime the server first. yes, this is an extra call and is inefficient.
         // but we're using NextJS for convenience, so this is a necessary evil.
@@ -36,18 +37,15 @@ const chatRoom1 = () => {
     
         if (!socket) {
           const newSocket = io();
-    
+
           
           // Confirms connection
           newSocket.on("connect", () => {
             newSocket.emit('room', room)
             console.log("Chat app connected");
           });
-    
-          // handles message
-          newSocket.on("message", (message) => {
-              console.log("message in handle ", message)
-            setHistory((history) => [...history, message]);
+          newSocket.on("message", (msg) => {
+            setHistory((history) => [...history, msg]);
           });
     
           // Logs when server disconnects
@@ -78,7 +76,7 @@ const chatRoom1 = () => {
         }
     
         // submit and blank-out the field.
-        socket.emit("message-submitted", { message, username, room });
+        socket.emit("message-submitted", { message, username });
         setMessage("");
       };
     
@@ -100,7 +98,6 @@ const chatRoom1 = () => {
           {/* Form submission */}
           <div>
             <form onSubmit={handleSubmit}>
-          
               <label>
                 Type your message:
                 <input
@@ -130,4 +127,4 @@ const chatRoom1 = () => {
       );
     }
 
-export default chatRoom1;
+export default chatRoom3;

@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import UsernameField from "../components/UsernameField";
+import Link from 'next/Link'
 
 const chatRoom3 = () => {
       // save the socket
@@ -25,27 +26,28 @@ const chatRoom3 = () => {
         }
         */
       ]);
-
+    
       const room = "room3"
-    
-    
+
       const connectSocket = () => {
-        // prime the server first. yes, this is an extra call and is inefficient.
-        // but we're using NextJS for convenience, so this is a necessary evil.
+        // prime the server first. extra call needed to use Nextjs
         fetch("/api/chatRoom");
         // after making sure that socket server is primed, connect to it.
     
         if (!socket) {
           const newSocket = io();
-
+    
           
           // Confirms connection
           newSocket.on("connect", () => {
             newSocket.emit('room', room)
             console.log("Chat app connected");
           });
-          newSocket.on("message", (msg) => {
-            setHistory((history) => [...history, msg]);
+    
+          // handles message
+          newSocket.on("message", (message) => {
+              console.log("message in handle ", message)
+            setHistory((history) => [...history, message]);
           });
     
           // Logs when server disconnects
@@ -76,7 +78,7 @@ const chatRoom3 = () => {
         }
     
         // submit and blank-out the field.
-        socket.emit("message-submitted", { message, username });
+        socket.emit("message-submitted", { message, username, room });
         setMessage("");
       };
     
@@ -87,7 +89,9 @@ const chatRoom3 = () => {
             <title>See who's talking!</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-    
+          <Link href="/">
+          <a >Back Home</a>
+          </Link>
           {/* The username area */}
           <UsernameField
             completed={isUsernameConfirmed}
@@ -98,6 +102,7 @@ const chatRoom3 = () => {
           {/* Form submission */}
           <div>
             <form onSubmit={handleSubmit}>
+          
               <label>
                 Type your message:
                 <input

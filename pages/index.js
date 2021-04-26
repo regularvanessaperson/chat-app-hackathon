@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import UsernameField from "../components/UsernameField";
 import ChatRoomCard from "../components/ChatRoomCard"
+import styles from '../styles/Home.module.css'
 
 export default function Home() {
 
@@ -14,7 +15,7 @@ export default function Home() {
 
 
   return (
-    <div>
+    <div className={styles.grid}>
       {/* This sets the page's title and favicon */}
       <Head>
         <title>See who's talking!</title>

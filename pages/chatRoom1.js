@@ -89,9 +89,14 @@ const chatRoom1 = () => {
             <title>See who's talking!</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <Link href="/">
-          <a >Back home</a>
-          </Link>
+           {/* The list of messages */}
+           <div>
+            {history.map(({ username, message }, i) => (
+              <div key={i}>
+                <b>{username}</b>: {message}
+              </div>
+            ))}
+          </div>
           {/* The username area */}
           <UsernameField
             completed={isUsernameConfirmed}
@@ -120,15 +125,12 @@ const chatRoom1 = () => {
             </form>
           </div>
     
-          {/* The list of messages */}
-          <div>
-            {history.map(({ username, message }, i) => (
-              <div key={i}>
-                <b>{username}</b>: {message}
-              </div>
-            ))}
-          </div>
+         
+          <Link href="/">
+          <a >Back home</a>
+          </Link>
         </div>
+        
       );
     }
 

@@ -17,6 +17,8 @@ const chatRoom3 = () => {
       // State for the form field.
       const [message, setMessage] = useState("");
     
+
+
       // State for message history.
       const [history, setHistory] = useState([
         /*
@@ -28,12 +30,15 @@ const chatRoom3 = () => {
       ]);
     
       const room = "room3"
+      
+      
 
       const connectSocket = () => {
-        // prime the server first. extra call needed to use Nextjs
+      // prime the server first. extra call needed to use Nextjs.
         fetch("/api/chatRoom");
         // after making sure that socket server is primed, connect to it.
-    
+        
+
         if (!socket) {
           const newSocket = io();
     
@@ -58,10 +63,12 @@ const chatRoom3 = () => {
           setSocket(() => newSocket);
         }
       };
+
     
       // The websocket code
       useEffect(() => {
         connectSocket();
+ 
       }, []);
     
       // this method submits the form and sends the message to the server.
@@ -76,22 +83,28 @@ const chatRoom3 = () => {
         if (!message || !isUsernameConfirmed) {
           return;
         }
-    
+        
         // submit and blank-out the field.
         socket.emit("message-submitted", { message, username, room });
         setMessage("");
       };
     
       return (
+        
         <div>
           {/* This sets the page's title and favicon */}
           <Head>
             <title>See who's talking!</title>
             <link rel="icon" href="/favicon.ico" />
           </Head>
-          <Link href="/">
-          <a >Back Home</a>
-          </Link>
+           {/* The list of messages */}
+           <div>
+            {history.map(({ username, message }, i) => (
+              <div key={i}>
+                <b>{username}</b>: {message}
+              </div>
+            ))}
+          </div>
           {/* The username area */}
           <UsernameField
             completed={isUsernameConfirmed}
@@ -120,15 +133,12 @@ const chatRoom3 = () => {
             </form>
           </div>
     
-          {/* The list of messages */}
-          <div>
-            {history.map(({ username, message }, i) => (
-              <div key={i}>
-                <b>{username}</b>: {message}
-              </div>
-            ))}
-          </div>
+         
+          <Link href="/">
+          <a >Back home</a>
+          </Link>
         </div>
+        
       );
     }
 

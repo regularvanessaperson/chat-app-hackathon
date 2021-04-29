@@ -7,6 +7,7 @@ import { Server } from "socket.io";
 // environment.
 // This solution is by rogeriojlle on StackOverflow:
 // https://stackoverflow.com/questions/57512366/how-to-use-socket-io-with-next-js-api-routes/62547135#62547135
+
 const ioHandler = (req, res) => {
   // if the socket server hasn't started yet, start it up.
   if (!res.socket.server.io) {

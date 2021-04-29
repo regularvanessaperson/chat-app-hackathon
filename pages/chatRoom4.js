@@ -91,52 +91,60 @@ const chatRoom4 = () => {
 
     return (
 
-        <div>
+        <div className="flex flex-col items-center ">
             {/* This sets the page's title and favicon */}
             <Head>
                 <title>See who's talking!</title>
                 <link rel="icon" href="/favicon.ico" />
             </Head>
-
-            {/* The username area */}
-            <UsernameField
-                completed={isUsernameConfirmed}
-                value={username}
-                onChange={(value) => setUsername(value)}
-                onSubmit={() => setUsernameConfirmed(true)}
-            />
-            {/* The list of messages */}
-            <div className="float-right">
-                {history.map(({ username, message }, i) => (
-                    <div key={i}>
-                        <b>{username}</b>: {message}
-                    </div>
-                ))}
-            </div>
-            {/* Form submission */}
-            <div>
-                <form onSubmit={handleSubmit}>
-                    <label>
-                        Type your message:
-                        <input
-                            type="text"
-                            name="message"
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            placeholder={
-                                username ? "Enter your message..." : "Set username..."
-                            }
-                            disabled={!isUsernameConfirmed}
-                        />
-                    </label>
-                    <input type="submit" value="Submit" disabled={!isUsernameConfirmed} />
-                </form>
-            </div>
-
-
-            <Link href="/">
-                <a >Back home</a>
+            <Link href="/ " >
+                <a className="flex content-center content-end mt-10 underline hover:no-underline ">Back Home</a>
             </Link>
+            {/* The username area */}
+            <div   >
+                <UsernameField
+                    completed={isUsernameConfirmed}
+                    value={username}
+                    onChange={(value) => setUsername(value)}
+                    onSubmit={() => setUsernameConfirmed(true)}
+                />
+            </div>
+            
+                {isUsernameConfirmed && (
+                    <div classname="w-full h-screen">
+                        {/* Form submission */}
+                        <div className="w-full bg-white rounded shadow-lg p-8 m-4 h-full">
+                            <form  onSubmit={handleSubmit}>
+ 
+                             <input
+                                        type="text"
+                                        name="message"
+                                        value={message}
+                                        onChange={(e) => setMessage(e.target.value)}
+                                        className="border py-2 px-3 text-grey-darkest" 
+                                        placeholder={
+                                            username ? "Enter your message..." : "Set username..."
+                                        }
+                                        disabled={!isUsernameConfirmed}
+                                    />
+                                
+                                <input className="py-1 px-2 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-75" type="submit" value="Submit" disabled={!isUsernameConfirmed} />
+                            </form>
+                             {/* The list of messages */}
+                        <div className="flex flex-col-reverse ">
+                            {history.map(({ username, message }, i) => (
+                                <div className="divide-y-4 divide-black divide-opacity-25" key={i}>
+                                    <b>{username}</b>: {message}
+                                </div>
+                            ))}
+                        </div>
+                        </div>
+                    </div>
+                )}
+            
+
+
+           
         </div>
 
     );

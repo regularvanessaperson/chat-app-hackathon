@@ -11,9 +11,9 @@ I wanted to build a simple app with the goal of learning how to use socket.io. I
 
 ### Wireframes
 ------------------------
-[See to wireframes](https://whimsical.com/chat-app-GeLor7UELRzgLYAe1QQ8qu)
+[Go to wireframes link](https://whimsical.com/chat-app-GeLor7UELRzgLYAe1QQ8qu)
 
-![Wireframe][Wireframe.png]
+![Wireframe](https://raw.githubusercontent.com/regularvanessaperson/chat-app-hackathon/main/public/Wireframe.png)
 
 ## Stretch Goals
 ------------------------

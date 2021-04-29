@@ -1,4 +1,4 @@
-import Link from 'next/Link'
+import Link from 'next/link'
 import styles from '../styles/Home.module.css'
 
 const ChatRoomCard = ({ value, link, onSubmit, completed, count }) => {

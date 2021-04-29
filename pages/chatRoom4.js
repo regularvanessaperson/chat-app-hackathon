@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 import UsernameField from "../components/UsernameField";
-import Link from 'next/Link'
+import Link from 'next/link'
 
 const chatRoom4 = () => {
     // save the socket

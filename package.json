@@ -2,12 +2,16 @@
   "name": "chat-app-hackathon",
   "version": "0.1.0",
   "private": true,
+  "cacheDirectories": [
+    ".next/cache"
+  ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT"
   },
   "dependencies": {
+    "dotenv": "^8.2.0",
     "next": "10.1.3",
     "react": "17.0.2",
     "react-dom": "17.0.2",
@@ -18,5 +22,17 @@
     "autoprefixer": "^10.2.5",
     "postcss": "^8.2.13",
     "tailwindcss": "^2.1.2"
-  }
+  },
+  "description": "------------------------ I wanted to build a simple app with the goal of learning how to use socket.io. I have built an app using Next.js before but this time I felt more comfortable and finally understand the relationship between pages and components. The user can choose a chat room and talk to other users that are currently in the chatroom but their name and messages are not stored.",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/regularvanessaperson/chat-app-hackathon.git"
+  },
+  "author": "Vanessa Avila",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/regularvanessaperson/chat-app-hackathon/issues"
+  },
+  "homepage": "https://github.com/regularvanessaperson/chat-app-hackathon#readme"
 }
